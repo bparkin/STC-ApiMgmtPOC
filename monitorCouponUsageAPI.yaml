@@ -1,0 +1,83 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "monitorCouponUsageAPI"
+host: "apiMgmt:couponUsage"
+basePath: "/rest"
+schemes:
+- "http"
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:
+    get:
+      parameters:
+      - name: "$path"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "accountNumber"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "couponID"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_get_$response"
+        401:
+          description: "Access Denied"
+    post:
+      parameters:
+      - name: "$path"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "incrementBy"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "accountNumber"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "couponID"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_post_$response"
+        401:
+          description: "Access Denied"
+definitions:
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_post_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_get_$response:
+    required:
+    - "offersSent"
+    properties:
+      offersSent:
+        type: "string"

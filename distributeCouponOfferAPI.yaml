@@ -1,0 +1,172 @@
+---
+swagger: "2.0"
+info:
+  description: "Find and distribute eligible offers for a customer based on gender,\
+    \ age and location."
+  version: "1.0"
+  title: "distributeCouponAPI"
+host: "apiMgmt:couponDistribute"
+basePath: "/rest"
+schemes:
+- "http"
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:
+    get:
+      description: "Get eligible offers for a customer."
+      parameters:
+      - name: "gender"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "$path"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "latitude"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "$resourceID"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "age"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "longitude"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_get_$response"
+        401:
+          description: "Access Denied"
+    post:
+      description: "Send Offers to Customer."
+      parameters:
+      - name: "customerAddress"
+        in: "query"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "offersToCustomer"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
+      - name: "$path"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "deliveryType"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "$resourceID"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_post_$response"
+        401:
+          description: "Access Denied"
+    put:
+      description: "Send Offers to Customer."
+      parameters:
+      - name: "customerAddress"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "gender"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "$path"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "deliveryType"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "$resourceID"
+        in: "header"
+        required: false
+        type: "string"
+      - in: "body"
+        name: "location"
+        required: true
+        schema:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_put.location"
+      - name: "age"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_put_$response"
+        401:
+          description: "Access Denied"
+definitions:
+  STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer:
+    required:
+    - "accountNumber"
+    - "couponID"
+    - "criteria"
+    - "expirationDate"
+    - "message"
+    properties:
+      criteria:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_get.criteria"
+      accountNumber:
+        type: "string"
+      couponID:
+        type: "string"
+      message:
+        type: "string"
+      expirationDate:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_put_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_post_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_get_$response:
+    required:
+    - "offersToCustomer"
+    properties:
+      offersToCustomer:
+        type: "array"
+        items:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_put.location:
+    required:
+    - "latitude"
+    - "longitude"
+    properties:
+      latitude:
+        type: "string"
+      longitude:
+        type: "string"
