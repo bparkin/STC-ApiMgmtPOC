@@ -5,7 +5,7 @@ info:
     \ age and location."
   version: "1.0"
   title: "distributeCouponAPI"
-host: "apiMgmt:couponDistribute"
+host: "104.196.165.85:25555"
 basePath: "/rest"
 schemes:
 - "http"

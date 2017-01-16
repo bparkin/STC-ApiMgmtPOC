@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   version: "1.0"
   title: "adminCouponOfferAPI"
-host: "apiMgmt:couponAdmin"
+host: "104.196.165.85:25555"
 basePath: "/rest"
 schemes:
 - "http"
