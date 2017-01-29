@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   version: "1.0"
   title: "Customer Billing API"
-host: "104.196.165.85:25555"
+host: "104.196.165.85:26666"
 basePath: "/rest"
 schemes:
 - "http"
