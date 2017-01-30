@@ -1,0 +1,149 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "Customer Billing API"
+host: "104.196.165.85:26666"
+basePath: "/rest"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /STC_ApiMgmt_Demo_BillingApp/billing/customer:
+    get:
+      parameters:
+      - name: "$path"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "accountNumber"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp/billing/customer:_get_$response"
+        401:
+          description: "Access Denied"
+    post:
+      parameters:
+      - name: "$path"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "header"
+        required: false
+        type: "string"
+      - in: "body"
+        name: "customerDetails"
+        required: true
+        schema:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:customer"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp/billing/customer:_post_$response"
+        401:
+          description: "Access Denied"
+    put:
+      parameters:
+      - name: "$path"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "header"
+        required: false
+        type: "string"
+      - in: "body"
+        name: "customerDetails"
+        required: true
+        schema:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:customer"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp/billing/customer:_put_$response"
+        401:
+          description: "Access Denied"
+    delete:
+      parameters:
+      - name: "$path"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "accountNumber"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp/billing/customer:_delete_$response"
+        401:
+          description: "Access Denied"
+definitions:
+  STC_ApiMgmt_Demo_BillingApp/billing/customer:_post_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+  STC_ApiMgmt_Demo_BillingApp/billing/customer:_get_$response:
+    required:
+    - "customerDetails"
+    properties:
+      customerDetails:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:customer"
+  STC_ApiMgmt_Demo_BillingApp/billing/customer:_put_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+      accountNumber:
+        type: "string"
+  STC_ApiMgmt_Demo_BillingApp/billing/customer:_delete_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+  STC_ApiMgmt_Demo_BillingApp.doc:customer:
+    required:
+    - "address"
+    - "billingInfo"
+    - "contact"
+    - "type"
+    properties:
+      billingInfo:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:billingInfo"
+      address:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:address"
+      companyInfo:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:company"
+      contact:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:contact"
+      type:
+        type: "string"
+      individualInfo:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:individual"
+      accountNumber:
+        type: "string"

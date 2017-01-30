@@ -1,0 +1,187 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "adminCouponOfferAPI"
+host: "104.196.165.85:26666"
+basePath: "/rest"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:
+    get:
+      description: "Retrieves Coupon information from registry\r\nInput:\r\naccountNumber\
+        \ (manadatory) - Partner's Billing Account Number\r\ncouponID (optional) -\
+        \ Specific coupon/offer identification (used to pull a specific offer from\
+        \ the registry).\r\nOutput:\r\noffers (JSON List) - List of offers that match\
+        \ the critieria."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "$path"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "accountNumber"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "couponID"
+        in: "formData"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get_$response"
+        401:
+          description: "Access Denied"
+    post:
+      description: "Inserts or Updates a coupon to the registry\r\nInput:\r\noffer\
+        \ - JSON document with offer details.  If a couponID exists for the account\
+        \ already the entry will updated, else it is inserted.\r\n\r\nOutput:\r\n\
+        result - Text description of insert/update results.\r\n"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "$path"
+        in: "header"
+        required: false
+        type: "string"
+      - in: "body"
+        name: "offerDetails"
+        required: true
+        schema:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
+      - name: "$resourceID"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_post_$response"
+        401:
+          description: "Access Denied"
+    put:
+      description: "Inserts or Updates a coupon to the registry\r\nInput:\r\noffer\
+        \ - JSON document with offer details.  If a couponID exists for the account\
+        \ already the entry will updated, else it is inserted.\r\n\r\nOutput:\r\n\
+        result - Text description of insert/update results.\r\n"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "$path"
+        in: "header"
+        required: false
+        type: "string"
+      - in: "body"
+        name: "offerDetails"
+        required: true
+        schema:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
+      - name: "$resourceID"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_put_$response"
+        401:
+          description: "Access Denied"
+    delete:
+      description: "Removes coupon from Registration\r\nInput:\r\naccountNumber -\
+        \ Patner's account used for billing usage of API.\r\ncouponID - Identification\
+        \ assigned by partner to the coupon so its distribution reach can be tracked.\r\
+        \n\r\nOutput:\r\nresult - Description of the delete action's return."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "$path"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "$resourceID"
+        in: "formData"
+        required: false
+        type: "string"
+      - name: "accountNumber"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "couponID"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_delete_$response"
+        401:
+          description: "Access Denied"
+definitions:
+  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_delete_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer:
+    required:
+    - "accountNumber"
+    - "couponID"
+    - "criteria"
+    - "expirationDate"
+    - "message"
+    properties:
+      criteria:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.criteria"
+      accountNumber:
+        type: "string"
+      couponID:
+        type: "string"
+      message:
+        type: "string"
+      expirationDate:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get_$response:
+    required:
+    - "offers"
+    properties:
+      offers:
+        type: "array"
+        items:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
+  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_put_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_post_$response:
+    required:
+    - "result"
+    properties:
+      result:
+        type: "string"
