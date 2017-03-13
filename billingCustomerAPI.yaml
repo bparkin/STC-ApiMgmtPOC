@@ -2,12 +2,11 @@
 swagger: "2.0"
 info:
   version: "1.0"
-  title: "Customer Billing API"
-host: "104.196.165.85:26666"
+  title: "Customer Billing API - HTTP"
+host: "104.196.165.85:25555"
 basePath: "/rest"
 schemes:
 - "http"
-- "https"
 consumes:
 - "application/json"
 produces:
@@ -25,7 +24,7 @@ paths:
         required: false
         type: "string"
       - name: "accountNumber"
-        in: "formData"
+        in: "query"
         required: false
         type: "string"
       responses:
@@ -90,7 +89,7 @@ paths:
         required: false
         type: "string"
       - name: "accountNumber"
-        in: "formData"
+        in: "query"
         required: false
         type: "string"
       responses:
@@ -121,17 +120,68 @@ definitions:
         type: "string"
       accountNumber:
         type: "string"
+  STC_ApiMgmt_Demo_BillingApp.doc:company:
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+  STC_ApiMgmt_Demo_BillingApp.doc:creditCard:
+    required:
+    - "cvc"
+    - "expiration"
+    - "name"
+    - "number"
+    properties:
+      number:
+        type: "string"
+        format: "password"
+      cvc:
+        type: "string"
+        format: "password"
+      name:
+        type: "string"
+      expiration:
+        type: "string"
+  STC_ApiMgmt_Demo_BillingApp.doc:contact:
+    required:
+    - "email"
+    - "phone"
+    properties:
+      phone:
+        type: "string"
+      email:
+        type: "string"
   STC_ApiMgmt_Demo_BillingApp.billing.customer:_delete_$response:
     required:
     - "result"
     properties:
       result:
         type: "string"
+  STC_ApiMgmt_Demo_BillingApp.doc:address:
+    required:
+    - "address1"
+    - "address2"
+    - "address3"
+    - "country"
+    - "zip"
+    properties:
+      zip:
+        type: "string"
+      country:
+        type: "string"
+      address3:
+        type: "string"
+      address2:
+        type: "string"
+      address1:
+        type: "string"
   STC_ApiMgmt_Demo_BillingApp.doc:customer:
     required:
     - "address"
     - "billingInfo"
     - "contact"
+    - "products"
     - "type"
     properties:
       billingInfo:
@@ -147,4 +197,42 @@ definitions:
       individualInfo:
         $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:individual"
       accountNumber:
+        type: "string"
+      products:
+        type: "array"
+        items:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:product"
+  STC_ApiMgmt_Demo_BillingApp.doc:product:
+    required:
+    - "package"
+    - "plan"
+    - "type"
+    properties:
+      package:
+        type: "string"
+      type:
+        type: "string"
+      plan:
+        type: "string"
+  STC_ApiMgmt_Demo_BillingApp.doc:billingInfo:
+    required:
+    - "billingType"
+    properties:
+      billingType:
+        type: "string"
+      accountNumber:
+        type: "string"
+      creditCard:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:creditCard"
+  STC_ApiMgmt_Demo_BillingApp.doc:individual:
+    required:
+    - "firstName"
+    - "lastName"
+    - "middleName"
+    properties:
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      middleName:
         type: "string"
