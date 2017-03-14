@@ -1,9 +1,10 @@
 ---
 swagger: "2.0"
 info:
+  description: "Register Coupon"
   version: "1.0"
-  title: "Add Coupon to Registry"
-host: "104.196.165.85:25555"
+  title: "adminCouponOfferAPI"
+host: "104.196.165.85:8080"
 basePath: "/rest"
 schemes:
 - "http"
@@ -20,14 +21,6 @@ paths:
         \ the registry).\r\nOutput:\r\noffers (JSON List) - List of offers that match\
         \ the critieria."
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "accountNumber"
         in: "query"
         required: true
@@ -49,19 +42,11 @@ paths:
         \ already the entry will updated, else it is inserted.\r\n\r\nOutput:\r\n\
         result - Text description of insert/update results.\r\n"
       parameters:
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
       - in: "body"
         name: "offerDetails"
         required: true
         schema:
           $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
       responses:
         200:
           description: "Successful"
@@ -75,19 +60,11 @@ paths:
         \ already the entry will updated, else it is inserted.\r\n\r\nOutput:\r\n\
         result - Text description of insert/update results.\r\n"
       parameters:
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
       - in: "body"
         name: "offerDetails"
         required: true
         schema:
           $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
       responses:
         200:
           description: "Successful"
@@ -101,14 +78,6 @@ paths:
         \ assigned by partner to the coupon so its distribution reach can be tracked.\r\
         \n\r\nOutput:\r\nresult - Description of the delete action's return."
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "accountNumber"
         in: "query"
         required: true
