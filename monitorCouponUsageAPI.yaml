@@ -1,13 +1,13 @@
 ---
 swagger: "2.0"
 info:
+  description: "Get the number of offers sent."
   version: "1.0"
   title: "monitorCouponUsageAPI"
-host: "104.196.165.85:26666"
+host: "104.196.165.85:25555"
 basePath: "/rest"
 schemes:
 - "http"
-- "https"
 consumes:
 - "application/json"
 produces:
@@ -15,6 +15,8 @@ produces:
 paths:
   /STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:
     get:
+      produces:
+      - "application/json"
       parameters:
       - name: "$path"
         in: "formData"
@@ -25,11 +27,11 @@ paths:
         required: false
         type: "string"
       - name: "accountNumber"
-        in: "formData"
+        in: "query"
         required: true
         type: "string"
       - name: "couponID"
-        in: "formData"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -40,6 +42,10 @@ paths:
         401:
           description: "Access Denied"
     post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
       parameters:
       - name: "$path"
         in: "formData"
