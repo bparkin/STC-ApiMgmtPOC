@@ -33,7 +33,7 @@ paths:
         200:
           description: "Successful"
           schema:
-            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get_$response"
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_get_$response"
         401:
           description: "Access Denied"
     post:
@@ -51,7 +51,7 @@ paths:
         200:
           description: "Successful"
           schema:
-            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_post_$response"
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_post_$response"
         401:
           description: "Access Denied"
     put:
@@ -69,7 +69,7 @@ paths:
         200:
           description: "Successful"
           schema:
-            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_put_$response"
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_put_$response"
         401:
           description: "Access Denied"
     delete:
@@ -90,7 +90,7 @@ paths:
         200:
           description: "Successful"
           schema:
-            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_delete_$response"
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_delete_$response"
         401:
           description: "Access Denied"
 definitions:
@@ -110,7 +110,7 @@ definitions:
       locations:
         type: "array"
         items:
-          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.locations"
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_get.locations"
   STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_delete_$response:
     required:
     - "result"
@@ -126,7 +126,7 @@ definitions:
     - "message"
     properties:
       criteria:
-        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.criteria"
+        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_get.criteria"
       accountNumber:
         type: "string"
       couponID:
@@ -161,7 +161,7 @@ definitions:
       latitude:
         type: "string"
       range:
-        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.range"
+        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_get.range"
       longitude:
         type: "string"
   STC_ApiMgmt_Demo_LocBasedCoupon.coupon.admin:_put_$response:
