@@ -1,10 +1,9 @@
 ---
 swagger: "2.0"
 info:
-  description: "Get the number of offers sent."
   version: "1.0"
   title: "monitorCouponUsageAPI"
-host: "104.196.165.85:25555"
+host: "104.196.165.85:8080"
 basePath: "/rest"
 schemes:
 - "http"
@@ -15,17 +14,7 @@ produces:
 paths:
   /STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:
     get:
-      produces:
-      - "application/json"
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "accountNumber"
         in: "query"
         required: true
@@ -42,29 +31,17 @@ paths:
         401:
           description: "Access Denied"
     post:
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "incrementBy"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
+        in: "query"
         required: false
         type: "string"
       - name: "accountNumber"
-        in: "formData"
+        in: "query"
         required: true
         type: "string"
       - name: "couponID"
-        in: "formData"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -72,6 +49,27 @@ paths:
           description: "Successful"
           schema:
             $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_post_$response"
+        401:
+          description: "Access Denied"
+    put:
+      parameters:
+      - name: "incrementBy"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "accountNumber"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "couponID"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_put_$response"
         401:
           description: "Access Denied"
 definitions:
@@ -86,4 +84,10 @@ definitions:
     - "offersSent"
     properties:
       offersSent:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_put_$response:
+    required:
+    - "result"
+    properties:
+      result:
         type: "string"
