@@ -1,10 +1,10 @@
 ---
 swagger: "2.0"
 info:
-  description: "Push the offer to customers that match the criteria"
+  description: "Check Customer Event, if match then distribute coupon"
   version: "1.0"
   title: "distributeCouponAPI"
-host: "104.196.165.85:25555"
+host: "104.196.165.85:8080"
 basePath: "/rest"
 schemes:
 - "http"
@@ -21,17 +21,9 @@ paths:
         in: "query"
         required: true
         type: "string"
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "latitude"
         in: "query"
         required: true
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
         type: "string"
       - name: "age"
         in: "query"
@@ -51,29 +43,11 @@ paths:
     post:
       description: "Send Offers to Customer."
       parameters:
-      - name: "customerAddress"
-        in: "header"
-        required: true
-        type: "string"
       - in: "body"
-        name: "offersToCustomer"
+        name: "customerEvent"
         required: true
         schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "deliveryType"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:customerEvent"
       responses:
         200:
           description: "Successful"
@@ -84,35 +58,11 @@ paths:
     put:
       description: "Send Offers to Customer."
       parameters:
-      - name: "customerAddress"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "gender"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "deliveryType"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
       - in: "body"
-        name: "location"
+        name: "customerEvent"
         required: true
         schema:
-          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_put.location"
-      - name: "age"
-        in: "header"
-        required: true
-        type: "string"
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:customerEvent"
       responses:
         200:
           description: "Successful"
@@ -121,7 +71,7 @@ paths:
         401:
           description: "Access Denied"
 definitions:
-  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_get.locations:
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_get.locations:
     required:
     - "latitude"
     - "longitude"
@@ -151,19 +101,46 @@ definitions:
         type: "string"
       expirationDate:
         type: "string"
-  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_put_$response:
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_put_$response:
     required:
     - "result"
     properties:
       result:
         type: "string"
-  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_post_$response:
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_post.location:
+    required:
+    - "latitude"
+    - "longitude"
+    properties:
+      latitude:
+        type: "string"
+      longitude:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_post_$response:
     required:
     - "result"
     properties:
       result:
         type: "string"
-  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_get.criteria:
+  STC_ApiMgmt_Demo_LocBasedCoupon.doc:customerEvent:
+    required:
+    - "age"
+    - "customerAddress"
+    - "deliveryType"
+    - "gender"
+    - "location"
+    properties:
+      customerAddress:
+        type: "string"
+      gender:
+        type: "string"
+      deliveryType:
+        type: "string"
+      location:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_post.location"
+      age:
+        type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_get.criteria:
     required:
     - "gender"
     - "locations"
@@ -180,7 +157,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_get.locations"
-  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_get_$response:
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_get_$response:
     required:
     - "offersToCustomer"
     properties:
@@ -188,7 +165,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
-  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_get.range:
+  STC_ApiMgmt_Demo_LocBasedCoupon.coupon.distribute:_get.range:
     required:
     - "distance"
     - "uom"
@@ -196,13 +173,4 @@ definitions:
       uom:
         type: "string"
       distance:
-        type: "string"
-  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/distribute:_put.location:
-    required:
-    - "latitude"
-    - "longitude"
-    properties:
-      latitude:
-        type: "string"
-      longitude:
         type: "string"
