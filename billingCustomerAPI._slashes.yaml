@@ -1,8 +1,9 @@
 ---
 swagger: "2.0"
 info:
+  description: "Interact with billing through customer noun"
   version: "1.0"
-  title: "Customer Billing API - HTTP"
+  title: "customerBillingAPI"
 host: "104.196.165.85:25555"
 basePath: "/rest"
 schemes:
@@ -15,14 +16,6 @@ paths:
   /STC_ApiMgmt_Demo_BillingApp/billing/customer:
     get:
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "accountNumber"
         in: "query"
         required: false
@@ -32,18 +25,14 @@ paths:
           description: "Successful"
           schema:
             $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp/billing/customer:_get_$response"
+        202:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp/billing/customer:_get_$response"
         401:
           description: "Access Denied"
     post:
       parameters:
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
       - in: "body"
         name: "customerDetails"
         required: true
@@ -58,14 +47,6 @@ paths:
           description: "Access Denied"
     put:
       parameters:
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
       - in: "body"
         name: "customerDetails"
         required: true
@@ -80,14 +61,6 @@ paths:
           description: "Access Denied"
     delete:
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "accountNumber"
         in: "query"
         required: false
@@ -100,19 +73,19 @@ paths:
         401:
           description: "Access Denied"
 definitions:
-  STC_ApiMgmt_Demo_BillingApp/billing/customer:_post_$response:
+  STC_ApiMgmt_Demo_BillingApp.billing.customer:_post_$response:
     required:
     - "result"
     properties:
       result:
         type: "string"
-  STC_ApiMgmt_Demo_BillingApp/billing/customer:_get_$response:
+  STC_ApiMgmt_Demo_BillingApp.billing.customer:_get_$response:
     required:
     - "customerDetails"
     properties:
       customerDetails:
         $ref: "#/definitions/STC_ApiMgmt_Demo_BillingApp.doc:customer"
-  STC_ApiMgmt_Demo_BillingApp/billing/customer:_put_$response:
+  STC_ApiMgmt_Demo_BillingApp.billing.customer:_put_$response:
     required:
     - "result"
     properties:
@@ -152,7 +125,7 @@ definitions:
         type: "string"
       email:
         type: "string"
-  STC_ApiMgmt_Demo_BillingApp/billing/customer:_delete_$response:
+  STC_ApiMgmt_Demo_BillingApp.billing.customer:_delete_$response:
     required:
     - "result"
     properties:
@@ -180,6 +153,7 @@ definitions:
     required:
     - "address"
     - "billingInfo"
+    - "companyInfo"
     - "contact"
     - "products"
     - "type"
