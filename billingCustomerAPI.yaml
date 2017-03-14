@@ -1,8 +1,9 @@
 ---
 swagger: "2.0"
 info:
+  description: "Interact with billing through customer noun"
   version: "1.0"
-  title: "Customer Billing API - HTTP"
+  title: "customerBillingAPI"
 host: "104.196.165.85:25555"
 basePath: "/rest"
 schemes:
@@ -15,14 +16,6 @@ paths:
   /STC_ApiMgmt_Demo_BillingApp.billing.customer:
     get:
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "accountNumber"
         in: "query"
         required: false
@@ -36,14 +29,6 @@ paths:
           description: "Access Denied"
     post:
       parameters:
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
       - in: "body"
         name: "customerDetails"
         required: true
@@ -58,14 +43,6 @@ paths:
           description: "Access Denied"
     put:
       parameters:
-      - name: "$path"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "header"
-        required: false
-        type: "string"
       - in: "body"
         name: "customerDetails"
         required: true
@@ -80,14 +57,6 @@ paths:
           description: "Access Denied"
     delete:
       parameters:
-      - name: "$path"
-        in: "formData"
-        required: false
-        type: "string"
-      - name: "$resourceID"
-        in: "formData"
-        required: false
-        type: "string"
       - name: "accountNumber"
         in: "query"
         required: false
@@ -180,6 +149,7 @@ definitions:
     required:
     - "address"
     - "billingInfo"
+    - "companyInfo"
     - "contact"
     - "products"
     - "type"
