@@ -2,11 +2,11 @@
 swagger: "2.0"
 info:
   version: "1.0"
-  title: "adminCouponOfferAPI"
-host: "104.196.165.85:26666"
+  title: "Add Coupon to Registry"
+host: "104.196.165.85:25555"
 basePath: "/rest"
 schemes:
-- "https"
+- "http"
 consumes:
 - "application/json"
 produces:
@@ -19,10 +19,6 @@ paths:
         \ Specific coupon/offer identification (used to pull a specific offer from\
         \ the registry).\r\nOutput:\r\noffers (JSON List) - List of offers that match\
         \ the critieria."
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
       parameters:
       - name: "$path"
         in: "formData"
@@ -33,11 +29,11 @@ paths:
         required: false
         type: "string"
       - name: "accountNumber"
-        in: "formData"
+        in: "query"
         required: true
         type: "string"
       - name: "couponID"
-        in: "formData"
+        in: "query"
         required: false
         type: "string"
       responses:
@@ -52,10 +48,6 @@ paths:
         \ - JSON document with offer details.  If a couponID exists for the account\
         \ already the entry will updated, else it is inserted.\r\n\r\nOutput:\r\n\
         result - Text description of insert/update results.\r\n"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
       parameters:
       - name: "$path"
         in: "header"
@@ -82,10 +74,6 @@ paths:
         \ - JSON document with offer details.  If a couponID exists for the account\
         \ already the entry will updated, else it is inserted.\r\n\r\nOutput:\r\n\
         result - Text description of insert/update results.\r\n"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
       parameters:
       - name: "$path"
         in: "header"
@@ -112,10 +100,6 @@ paths:
         \ Patner's account used for billing usage of API.\r\ncouponID - Identification\
         \ assigned by partner to the coupon so its distribution reach can be tracked.\r\
         \n\r\nOutput:\r\nresult - Description of the delete action's return."
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
       parameters:
       - name: "$path"
         in: "formData"
@@ -126,11 +110,11 @@ paths:
         required: false
         type: "string"
       - name: "accountNumber"
-        in: "formData"
+        in: "query"
         required: true
         type: "string"
       - name: "couponID"
-        in: "formData"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -141,6 +125,23 @@ paths:
         401:
           description: "Access Denied"
 definitions:
+  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.criteria:
+    required:
+    - "gender"
+    - "locations"
+    - "maxAge"
+    - "minAge"
+    properties:
+      gender:
+        type: "string"
+      maxAge:
+        type: "string"
+      minAge:
+        type: "string"
+      locations:
+        type: "array"
+        items:
+          $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.locations"
   STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_delete_$response:
     required:
     - "result"
@@ -165,6 +166,15 @@ definitions:
         type: "string"
       expirationDate:
         type: "string"
+  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.range:
+    required:
+    - "distance"
+    - "uom"
+    properties:
+      uom:
+        type: "string"
+      distance:
+        type: "string"
   STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get_$response:
     required:
     - "offers"
@@ -173,6 +183,18 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.doc:offer"
+  STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.locations:
+    required:
+    - "latitude"
+    - "longitude"
+    - "range"
+    properties:
+      latitude:
+        type: "string"
+      range:
+        $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_get.range"
+      longitude:
+        type: "string"
   STC_ApiMgmt_Demo_LocBasedCoupon/coupon/admin:_put_$response:
     required:
     - "result"
