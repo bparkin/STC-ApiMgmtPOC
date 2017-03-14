@@ -28,6 +28,10 @@ paths:
           description: "Successful"
           schema:
             $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_get_$response"
+        202:
+          description: "Accepted"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_get_$response"
         401:
           description: "Access Denied"
     post:
@@ -49,6 +53,10 @@ paths:
           description: "Successful"
           schema:
             $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_post_$response"
+        202:
+          description: "Accepted"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_post_$response"
         401:
           description: "Access Denied"
     put:
@@ -68,6 +76,10 @@ paths:
       responses:
         200:
           description: "Successful"
+          schema:
+            $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_put_$response"
+        202:
+          description: "Accepted"
           schema:
             $ref: "#/definitions/STC_ApiMgmt_Demo_LocBasedCoupon.coupon.monitor:_put_$response"
         401:
